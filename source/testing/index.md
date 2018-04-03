@@ -48,6 +48,7 @@ import { setupTest } from 'ember-qunit';
 
 module('Service | flash-messages', function(hooks) {
   setupTest(hooks);
+
   test('it buffers messages', function(assert) {
     let service = this.owner.lookup('service:flash-messages');
 
@@ -85,14 +86,18 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-test('it should count clicks', async function(assert) {
-  this.set('value', 0);
+module('Component | counter', function(hooks) {
+  setupRenderingTest(hooks);
 
-  await render(hbs`{{x-counter value=value onUpdate=( … )}}`);
-  assert.equal(this.element.textContent, '0 clicks');
+  test('it should count clicks', async function(assert) {
+    this.set('value', 0);
 
-  await click('.counter');
-  assert.equal(this.element.textContent, '1 click');
+    await render(hbs`{{x-counter value=value onUpdate=( … )}}`);
+    assert.equal(this.element.textContent, '0 clicks');
+
+    await click('.counter');
+    assert.equal(this.element.textContent, '1 click');
+  });
 });
 ```
 
